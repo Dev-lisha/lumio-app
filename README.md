@@ -8,11 +8,11 @@ Part of [Lumio](https://github.com/lumio-network) — an open-source cooperative
 
 ## Apps
 
-| App              | Name               | Stack                | Port | Responsibility                                      |
-| ---------------- | ------------------ | -------------------- | ---- | --------------------------------------------------- |
-| `apps/dashboard` | `@lumio/dashboard` | Next.js (App Router) | 3001 | Member experience — contributions, treasury, votes. |
-| `apps/admin`     | `@lumio/admin`     | Next.js (App Router) | 3002 | Operator panel — members, cycles, payouts.          |
-| `apps/api`       | `@lumio/api`       | NestJS               | 3000 | Backend — talks to contracts via `@lumio/sdk`.      |
+| App              | Name                               | Stack                | Port | Responsibility                                      |
+| ---------------- | ---------------------------------- | -------------------- | ---- | --------------------------------------------------- |
+| `apps/dashboard` | `@lumio/dashboard`                 | Next.js (App Router) | 3001 | Member experience — contributions, treasury, votes. |
+| `apps/admin`     | `@lumio/admin`                     | Next.js (App Router) | 3002 | Operator panel — members, cycles, payouts.          |
+| `apps/api`       | [`@lumio/api`](apps/api/README.md) | NestJS               | 3000 | Backend — talks to contracts via `@lumio/sdk`.      |
 
 > ⚠️ **Scaffold.** Every page is a placeholder rendered with the real design system. The API
 > returns HTTP 501 with `not-implemented` summaries for `GET /v1/treasury`,

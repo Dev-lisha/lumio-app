@@ -1,10 +1,14 @@
 import { Badge, Button, Card, CardBody, CardTitle } from "@lumio/ui";
+import { ApiHealthBanner } from "../components/ApiHealthBanner";
 
 export default function DashboardHome() {
   return (
     <section className="space-y-10">
       <div className="space-y-4">
-        <Badge variant="lumen">Scaffold</Badge>
+        <div className="flex flex-wrap items-center gap-3">
+          <Badge variant="lumen">Scaffold</Badge>
+          <ApiHealthBanner />
+        </div>
         <h1 className="font-display text-display-l font-medium text-paper">
           Member dashboard — coming soon
         </h1>

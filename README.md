@@ -68,6 +68,10 @@ curl http://localhost:3000/health
 
 ## Configuration
 
+### Dashboard Environment Variables
+
+- **`NEXT_PUBLIC_API_URL`** — Base URL for the dashboard's API health check. Defaults to `http://localhost:3000`.
+
 ### API Environment Variables
 
 - **`CORS_ORIGINS`** — Comma-separated list of allowed CORS origins for the API. Defaults to `http://localhost:3001,http://localhost:3002` (dashboard and admin dev ports).

@@ -1,15 +1,17 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { Controller, Get, HttpCode, HttpStatus } from "@nestjs/common";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { GovernanceService } from "./governance.service";
 
 @ApiTags("governance")
-@Controller("governance")
+@Controller({ path: "governance", version: "1" })
 export class GovernanceController {
   constructor(private readonly governance: GovernanceService) {}
 
   @Get()
-  @ApiOkResponse({
-    description: "Governance summary and proposal tally",
+  @HttpCode(HttpStatus.NOT_IMPLEMENTED)
+  @ApiResponse({
+    status: HttpStatus.NOT_IMPLEMENTED,
+    description: "Governance summary and proposal tally are not implemented",
     schema: {
       type: "object",
       required: ["contract", "status", "tally"],

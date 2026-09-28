@@ -14,8 +14,9 @@ Part of [Lumio](https://github.com/lumio-network) — an open-source cooperative
 | `apps/admin`     | `@lumio/admin`     | Next.js (App Router) | 3002 | Operator panel — members, cycles, payouts.          |
 | `apps/api`       | `@lumio/api`       | NestJS               | 3000 | Backend — talks to contracts via `@lumio/sdk`.      |
 
-> ⚠️ **Scaffold.** Every page is a placeholder rendered with the real design system, and the API
-> returns `not-implemented` for domain routes (only `GET /health` does real work). No auth, no
+> ⚠️ **Scaffold.** Every page is a placeholder rendered with the real design system. The API
+> returns HTTP 501 with `not-implemented` summaries for `GET /v1/treasury`,
+> `GET /v1/governance`, and `GET /v1/dividends`; `GET /health` remains unversioned. No auth, no
 > database schema, no live contract calls yet — those are later phases.
 
 ## Requirements

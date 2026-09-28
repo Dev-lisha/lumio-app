@@ -1,11 +1,12 @@
 import "reflect-metadata";
-import { Logger, ValidationPipe } from "@nestjs/common";
+import { Logger, ValidationPipe, VersioningType } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { ConfigService } from "@nestjs/config";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import helmet from "helmet";
 import { AppModule } from "./app.module";
 import { AllExceptionsFilter } from "./common/filters/all-exceptions.filter";
+import { RequestIdMiddleware } from "./common/middleware/request-id.middleware";
 import type { AppConfig } from "./config/env.validation";
 
 async function bootstrap() {
@@ -14,6 +15,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableShutdownHooks();
+  app.enableVersioning({ type: VersioningType.URI, defaultVersion: "1" });
+
+  app.use(new RequestIdMiddleware().use);
+
   const helmetMiddleware = helmet();
   const swaggerHelmetMiddleware = helmet({ contentSecurityPolicy: false });
   app.use((...args: Parameters<typeof helmetMiddleware>) => {

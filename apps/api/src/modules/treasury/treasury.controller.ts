@@ -1,15 +1,17 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { Controller, Get, HttpCode, HttpStatus } from "@nestjs/common";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { TreasuryService } from "./treasury.service";
 
 @ApiTags("treasury")
-@Controller("treasury")
+@Controller({ path: "treasury", version: "1" })
 export class TreasuryController {
   constructor(private readonly treasury: TreasuryService) {}
 
   @Get()
-  @ApiOkResponse({
-    description: "Treasury summary",
+  @HttpCode(HttpStatus.NOT_IMPLEMENTED)
+  @ApiResponse({
+    status: HttpStatus.NOT_IMPLEMENTED,
+    description: "Treasury summary is not implemented",
     schema: {
       type: "object",
       required: ["contract", "status"],

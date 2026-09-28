@@ -1,4 +1,11 @@
-import { Controller, Get, HttpException, HttpStatus } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  VERSION_NEUTRAL,
+  Version,
+} from "@nestjs/common";
 import { ApiOkResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { SkipThrottle } from "@nestjs/throttler";
 
@@ -49,6 +56,7 @@ export class HealthController {
       },
     },
   })
+  @Version(VERSION_NEUTRAL)
   check() {
     const healthStatus = this.performHealthCheck();
 

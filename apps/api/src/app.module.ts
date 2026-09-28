@@ -1,8 +1,12 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { HealthController } from "./health/health.controller";
+import { HealthService } from "./health/health.service";
+import { MetricsController } from "./metrics/metrics.controller";
+import { MetricsMiddleware } from "./metrics/metrics.middleware";
+import { MetricsService } from "./metrics/metrics.service";
 import { TreasuryModule } from "./modules/treasury/treasury.module";
 import { GovernanceModule } from "./modules/governance/governance.module";
 import { DividendsModule } from "./modules/dividends/dividends.module";
@@ -33,7 +37,16 @@ import type { AppConfig } from "./config/env.validation";
     GovernanceModule,
     DividendsModule,
   ],
-  controllers: [HealthController],
-  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
+  controllers: [HealthController, MetricsController],
+  providers: [
+    HealthService,
+    MetricsMiddleware,
+    MetricsService,
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(MetricsMiddleware).forRoutes("*");
+  }
+}

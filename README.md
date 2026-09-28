@@ -77,6 +77,18 @@ curl http://localhost:3000/health
 
 The API serves its OpenAPI document and Swagger UI at `/docs-json` and `/docs`. These routes are enabled in every environment and are unauthenticated. Helmet applies security headers globally; its Content-Security-Policy header is disabled only for `/docs` and its UI assets so Swagger's inline bootstrap can run. The API's CORS allowlist remains controlled by `CORS_ORIGINS`, so dashboard and admin origins do not need header relaxations. Frontend-specific CSP tuning is a follow-up.
 
+### Prometheus Metrics
+
+The API exposes process and HTTP request metrics at the unversioned `/metrics` endpoint. Add this scrape job to `prometheus.yml`:
+
+```yaml
+scrape_configs:
+  - job_name: lumio-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["localhost:3000"]
+```
+
 ## Scripts
 
 ```bash

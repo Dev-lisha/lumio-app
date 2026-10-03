@@ -21,9 +21,12 @@ Part of [Lumio](https://github.com/lumio-network) — an open-source cooperative
 
 ## Requirements
 
-- Node.js ≥ 20
+- Node.js ≥ 20; the default is pinned to Node 20 in `.nvmrc` (`nvm use`), and CI also tests Node 22.
 - pnpm 9.12 (`corepack enable` or `npm i -g pnpm@9.12.0`)
 - A **sibling `lumio-sdk` checkout, built** (see below)
+
+The root `.npmrc` enables strict engine checks, so package installs fail early if Node or pnpm does
+not meet the declared `package.json` requirements.
 
 ## ⚠️ Getting started — read this first
 

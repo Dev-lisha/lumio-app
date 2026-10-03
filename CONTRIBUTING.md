@@ -38,8 +38,11 @@ See the [README](./README.md) for the full walkthrough and per-app commands.
 
 ## Prerequisites
 
-- **Node.js ≥ 20**
-- **pnpm 9.12.0** — `corepack enable` (recommended) or `npm i -g pnpm@9.12.0`
+- **Node.js ≥ 20** — Node 20 is pinned in `.nvmrc` (`nvm use`); CI also tests Node 22.
+- **pnpm 9.12.0** — `corepack enable` (recommended) or `npm i -g pnpm@9.12.0`. `.npmrc` enforces
+  the Node and pnpm versions declared in `package.json`.
+- **EditorConfig support** — the root `.editorconfig` matches Prettier's UTF-8, LF, two-space
+  indentation, final newline, and whitespace defaults.
 
 ## Before you open a PR
 

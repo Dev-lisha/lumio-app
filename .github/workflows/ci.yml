@@ -12,6 +12,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 22]
     steps:
       - name: Checkout lumio-app
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -39,7 +43,7 @@ jobs:
             lumio-sdk/packages/sdk/dist
             lumio-sdk/packages/shared/dist
             lumio-sdk/packages/ui/dist
-          key: ${{ runner.os }}-lumio-sdk-build-${{ hashFiles('lumio-sdk/pnpm-lock.yaml') }}-${{ steps.sdk-revision.outputs.commit }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-lumio-sdk-build-${{ hashFiles('lumio-sdk/pnpm-lock.yaml') }}-${{ steps.sdk-revision.outputs.commit }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
@@ -49,11 +53,17 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
-          node-version: 20
-          cache: pnpm
-          cache-dependency-path: |
-            lumio-sdk/pnpm-lock.yaml
-            lumio-app/pnpm-lock.yaml
+          node-version: ${{ matrix.node-version }}
+
+      - name: Resolve pnpm store path
+        id: pnpm-store
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache pnpm store
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-pnpm-${{ hashFiles('lumio-sdk/pnpm-lock.yaml', 'lumio-app/pnpm-lock.yaml') }}
 
       - name: Build the SDK (provides the linked @lumio/* packages)
         if: steps.sdk-build-cache.outputs.cache-hit != 'true'

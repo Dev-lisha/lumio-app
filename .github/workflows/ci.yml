@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout lumio-app
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           path: lumio-app
 
@@ -22,7 +22,7 @@ jobs:
       # `link:` to a sibling lumio-sdk checkout, so CI must lay them out as
       # siblings and build the SDK before the app.
       - name: Checkout lumio-sdk (sibling)
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           repository: lumio-network/lumio-sdk
           path: lumio-sdk
@@ -33,7 +33,7 @@ jobs:
 
       - name: Cache SDK build artifacts
         id: sdk-build-cache
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             lumio-sdk/packages/sdk/dist
@@ -42,12 +42,12 @@ jobs:
           key: ${{ runner.os }}-lumio-sdk-build-${{ hashFiles('lumio-sdk/pnpm-lock.yaml') }}-${{ steps.sdk-revision.outputs.commit }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
         with:
           version: 9.12.0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
           cache: pnpm
@@ -88,4 +88,14 @@ jobs:
 
       - name: Test API
         working-directory: lumio-app/apps/api
-        run: npx jest
+        run: pnpm test:cov
+
+      - name: Upload API coverage
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: api-jest-coverage
+          path: lumio-app/apps/api/coverage/
+          if-no-files-found: ignore
+          retention-days: 14
+        continue-on-error: true

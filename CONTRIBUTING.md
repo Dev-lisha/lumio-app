@@ -68,10 +68,12 @@ commit and lockfile, rebuilding them on a cache miss.
 2. **Branch** off `main` (e.g. `feat/dashboard-open-graph`).
 3. **Keep it focused.** One issue per PR; if you change behaviour, add coverage (see the note below —
    the test harness is itself a good first issue).
-4. **Commit** using [Conventional Commits](https://www.conventionalcommits.org/), e.g.
-   `feat(api): return 200/503 from a health endpoint`, scoped to the app you touch
-   (`dashboard` / `admin` / `api`).
-5. **Open the PR** against `main`, link the issue (`Closes #123`), and say how you verified it (paste
+4. **Title** pull requests using [Conventional Commits](https://www.conventionalcommits.org/).
+   Allowed types are `feat`, `fix`, `ci`, `build`, `chore`, `docs`, `refactor`, `test`, and `perf`.
+   Common scopes are `admin`, `api`, `apps`, `build`, `ci`, `config`, `dashboard`, `deps`, `docs`,
+   `security`, `test`, and `tooling`; scopes are optional.
+5. **Commit** using Conventional Commits, e.g. `feat(api): return 200/503 from a health endpoint`.
+6. **Open the PR** against `main`, link the issue (`Closes #123`), and say how you verified it (paste
    the relevant `pnpm build` / `curl` output).
 
 ## A note on tests

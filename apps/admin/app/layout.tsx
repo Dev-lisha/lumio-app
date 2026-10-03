@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import appPackage from "../package.json";
+import tokens from "@lumio/ui/tokens/design-tokens.json";
 import localFont from "next/font/local";
 import Image from "next/image";
 import "@lumio/ui/tokens/design-tokens.css";
@@ -50,6 +51,11 @@ export const metadata: Metadata = {
     description: "Operate the cooperative: members, cycles, proposals, and payouts.",
     images: ["/brand/lumio-lockup-horizontal-on-light.svg"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: tokens.color.neutral_dark["ink-950"],
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

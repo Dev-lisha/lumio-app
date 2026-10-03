@@ -6,7 +6,8 @@
   "description": "Lumio applications — member dashboard, admin panel, and API.",
   "packageManager": "pnpm@9.12.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=20",
+    "pnpm": "9.12.0"
   },
   "scripts": {
     "build": "turbo run build",

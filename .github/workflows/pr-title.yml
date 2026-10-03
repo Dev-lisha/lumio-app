@@ -1,0 +1,43 @@
+name: PR title
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  lint:
+    name: Lint PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Conventional Commit title
+        uses: amannn/action-semantic-pull-request@e32d7e603df1aa1ba07e981f2a23455dee596825 # v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            ci
+            build
+            chore
+            docs
+            refactor
+            test
+            perf
+          scopes: |
+            admin
+            api
+            apps
+            build
+            ci
+            config
+            dashboard
+            deps
+            docs
+            security
+            test
+            tooling
+          requireScope: false

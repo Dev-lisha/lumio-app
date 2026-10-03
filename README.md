@@ -102,6 +102,21 @@ pnpm lint        # eslint .
 pnpm format      # prettier --write .
 ```
 
+## Frontend checks and bundle analysis
+
+Run the dashboard render smoke tests with:
+
+```bash
+pnpm --filter @lumio/dashboard test
+```
+
+Generate a bundle analysis report for either app with:
+
+```bash
+ANALYZE=true pnpm --filter @lumio/dashboard build
+ANALYZE=true pnpm --filter @lumio/admin build
+```
+
 ## Design system
 
 The apps import the finalized brand foundation from `@lumio/ui`:

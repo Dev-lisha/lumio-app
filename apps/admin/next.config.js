@@ -12,4 +12,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = async () => {
+  if (globalThis.process.env.ANALYZE !== "true") return nextConfig;
+
+  const { default: withBundleAnalyzer } = await import("@next/bundle-analyzer");
+  return withBundleAnalyzer({ enabled: true })(nextConfig);
+};

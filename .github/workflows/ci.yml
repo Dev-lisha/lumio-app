@@ -42,7 +42,7 @@ jobs:
           key: ${{ runner.os }}-lumio-sdk-build-${{ hashFiles('lumio-sdk/pnpm-lock.yaml') }}-${{ steps.sdk-revision.outputs.commit }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 9.12.0
 

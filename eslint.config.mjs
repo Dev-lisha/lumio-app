@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -14,6 +15,10 @@ export default tseslint.config(
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    ...jsxA11y.flatConfigs.recommended,
+    files: ["apps/*/app/**/*.tsx", "apps/shared/**/*.tsx"],
+  },
   {
     // CommonJS config files (next.config.js, postcss.config.js) use `module.exports`.
     files: ["**/*.js", "**/*.cjs"],

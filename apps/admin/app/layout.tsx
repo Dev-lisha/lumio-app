@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import appPackage from "../package.json";
 import localFont from "next/font/local";
 import Image from "next/image";
 import "@lumio/ui/tokens/design-tokens.css";
@@ -54,7 +55,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${ui.variable} ${mono.variable}`}>
-      <body>
+      <body className="flex min-h-screen flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:absolute focus:left-6 focus:top-6 focus:z-50 focus:not-sr-only focus:rounded-s focus:bg-lumen focus:px-4 focus:py-3 focus:font-ui focus:text-body-s focus:text-ink-950 focus:ring-2 focus:ring-paper"
+        >
+          Skip to main content
+        </a>
         <header className="border-b border-ink-800">
           <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
             {/* Real brand asset from the foundation kit, copied verbatim — never redrawn. */}
@@ -70,7 +77,28 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </span>
           </nav>
         </header>
-        <main className="mx-auto max-w-5xl px-6 py-16">{children}</main>
+        <main id="main" tabIndex={-1} className="mx-auto w-full max-w-5xl flex-1 px-6 py-16">
+          {children}
+        </main>
+        <footer className="border-t border-ink-800">
+          <div className="mx-auto flex max-w-5xl flex-col gap-3 px-6 py-6 font-ui text-body-s text-ink-400 sm:flex-row sm:items-center sm:justify-between">
+            <span>Version {appPackage.version}</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <a
+                className="transition-colors hover:text-paper"
+                href="https://github.com/lumio-network"
+              >
+                Lumio on GitHub
+              </a>
+              <a
+                className="transition-colors hover:text-paper"
+                href="https://www.apache.org/licenses/LICENSE-2.0"
+              >
+                Apache-2.0
+              </a>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

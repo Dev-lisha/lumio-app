@@ -4,6 +4,7 @@ import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import Image from "next/image";
 import "@lumio/ui/tokens/design-tokens.css";
 import "./globals.css";
+import { siteUrl } from "./site-url";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lumio.network"), // TODO: Replace with actual production domain
+  metadataBase: siteUrl,
   title: "Lumio — Member Dashboard",
   description: "Your cooperative's savings, contributions, and payouts at a glance.",
   icons: { icon: "/brand/favicon.svg" },

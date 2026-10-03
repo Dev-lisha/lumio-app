@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout lumio-app
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: lumio-app
 
@@ -22,7 +22,7 @@ jobs:
       # `link:` to a sibling lumio-sdk checkout, so CI must lay them out as
       # siblings and build the SDK before the app.
       - name: Checkout lumio-sdk (sibling)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: lumio-network/lumio-sdk
           path: lumio-sdk

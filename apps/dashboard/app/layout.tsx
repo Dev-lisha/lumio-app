@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import "@lumio/ui/tokens/design-tokens.css";
 import "./globals.css";
 import { siteUrl } from "./site-url";
 
-const display = Fraunces({
-  subsets: ["latin"],
-  weight: ["500"],
+const display = localFont({
+  src: "../../fonts/fraunces-latin-500.woff2",
+  weight: "500",
   variable: "--font-lumio-display",
 });
-const ui = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const ui = localFont({
+  src: "../../fonts/ibm-plex-sans-latin-variable.woff2",
+  weight: "400 600",
   variable: "--font-lumio-ui",
 });
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["500"],
+const mono = localFont({
+  src: "../../fonts/ibm-plex-mono-latin-500.woff2",
+  weight: "500",
   variable: "--font-lumio-mono",
 });
 

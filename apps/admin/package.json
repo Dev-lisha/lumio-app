@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@lumio/app-shell": "workspace:*",
     "@lumio/sdk": "link:../../../lumio-sdk/packages/sdk",
     "@lumio/shared": "link:../../../lumio-sdk/packages/shared",
     "@lumio/ui": "link:../../../lumio-sdk/packages/ui",

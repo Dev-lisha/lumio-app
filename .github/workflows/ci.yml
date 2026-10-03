@@ -27,6 +27,20 @@ jobs:
           repository: lumio-network/lumio-sdk
           path: lumio-sdk
 
+      - name: Resolve SDK revision
+        id: sdk-revision
+        run: echo "commit=$(git -C lumio-sdk rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache SDK build artifacts
+        id: sdk-build-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            lumio-sdk/packages/sdk/dist
+            lumio-sdk/packages/shared/dist
+            lumio-sdk/packages/ui/dist
+          key: ${{ runner.os }}-lumio-sdk-build-${{ hashFiles('lumio-sdk/pnpm-lock.yaml') }}-${{ steps.sdk-revision.outputs.commit }}
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -42,6 +56,7 @@ jobs:
             lumio-app/pnpm-lock.yaml
 
       - name: Build the SDK (provides the linked @lumio/* packages)
+        if: steps.sdk-build-cache.outputs.cache-hit != 'true'
         working-directory: lumio-sdk
         run: |
           pnpm install --frozen-lockfile
